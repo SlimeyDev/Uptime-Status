@@ -5,8 +5,7 @@ app = Flask(__name__)
 
 website_urls = [
     "https://slimeydev.github.io/",
-    "https://slimeyapi.onrender.com/random",
-    "https://slimeyapi.onrender.com/weather?place=India",
+    "https://slimeyapi.onrender.com/",
     "https://spellgpt.onrender.com/"
 ]
 
