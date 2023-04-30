@@ -1,25 +1,28 @@
+from flask import Flask, render_template
 import requests
 
-website_url = [
+app = Flask(__name__)
+
+website_urls = [
     "https://slimeydev.github.io/",
     "https://slimeyapi.onrender.com/random",
     "https://slimeyapi.onrender.com/weather?place=India",
     "https://spellgpt.onrender.com/"
 ]
 
-statuses = {
-    200: "Service Available",
-    301: "Permanent Redirect",
-    302: "Temporary Redirect",
-    404: "Not Found",
-    500: "Internal Server Error",
-    503: "Service Unavailable"
-}
+@app.route('/')
+def index():
+    website_status = {}
+    for url in website_urls:
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                website_status[url] = "up"
+            else:
+                website_status[url] = f"down with status code {response.status_code}"
+        except:
+            website_status[url] = "an error occurred"
+    return render_template('index.html', website_status=website_status)
 
-for url in website_url:
-    try:
-        web_response = requests.get(url)
-        print(url, statuses[web_response.status_code])
-
-    except:
-        print(url, statuses[web_response.status_code])
+if __name__ == '__main__':
+    app.run(debug=True)
