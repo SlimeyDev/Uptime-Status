@@ -6,8 +6,16 @@ app = Flask(__name__)
 website_urls = [
     "https://slimeydev.github.io/",
     "https://slimeyapi.onrender.com/",
-    "https://spellgpt.onrender.com/"
+    "https://spellgpt.onrender.com/",
+    "https://slimey-bot.slimeydev.repl.co"
 ]
+
+website_names = {
+    "https://slimeydev.github.io/": "Website",
+    "https://slimeyapi.onrender.com/": "SlimeyAPI",
+    "https://spellgpt.onrender.com/": "SpellGPT",
+    "https://slimey-bot.slimeydev.repl.co": "SlimeyBOT"
+}
 
 @app.route('/')
 def index():
@@ -21,7 +29,7 @@ def index():
                 website_status[url] = f"down with status code {response.status_code}"
         except:
             website_status[url] = "an error occurred"
-    return render_template('index.html', website_status=website_status)
+    return render_template('index.html', website_status=website_status, website_names=website_names)
 
 if __name__ == '__main__':
     app.run(debug=True)

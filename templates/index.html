@@ -84,7 +84,7 @@
             <tbody>
                 {% for url, status in website_status.items() %}
                 <tr>
-                    <td>{{ url }}</td>
+                    <td>{{ website_names[url] }}</td>
                     <td>{{ status }}</td>
                 </tr>
                 {% endfor %}
